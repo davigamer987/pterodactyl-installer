@@ -373,54 +373,6 @@ ptdl_dl() {
   echo "* Downloaded pterodactyl panel files & installed composer dependencies!"
 }
 
-# Create a databse with user
-create_database() {
-  if [ "$OS" == "centos" ]; then
-    # secure MariaDB
-    echo "* MariaDB secure installation. The following are safe defaults."
-    echo "* Set root password? [Y/n] Y"
-    echo "* Remove anonymous users? [Y/n] Y"
-    echo "* Disallow root login remotely? [Y/n] Y"
-    echo "* Remove test database and access to it? [Y/n] Y"
-    echo "* Reload privilege tables now? [Y/n] Y"
-    echo "*"
-
-    [ "$OS_VER_MAJOR" == "7" ] && mariadb-secure-installation
-    [ "$OS_VER_MAJOR" == "8" ] && mysql_secure_installation
-
-    echo "* The script should have asked you to set the MySQL root password earlier (not to be confused with the pterodactyl database user password)"
-    echo "* MySQL will now ask you to enter the password before each command."
-
-    echo "* Create MySQL user."
-    mysql -u root -p -e "CREATE USER '${MYSQL_USER}'@'127.0.0.1' IDENTIFIED BY '${MYSQL_PASSWORD}';"
-
-    echo "* Create database."
-    mysql -u root -p -e "CREATE DATABASE ${MYSQL_DB};"
-
-    echo "* Grant privileges."
-    mysql -u root -p -e "GRANT ALL PRIVILEGES ON ${MYSQL_DB}.* TO '${MYSQL_USER}'@'127.0.0.1' WITH GRANT OPTION;"
-
-    echo "* Flush privileges."
-    mysql -u root -p -e "FLUSH PRIVILEGES;"
-  else
-    echo "* Performing MySQL queries.."
-
-    echo "* Creating MySQL user.."
-    mysql -u root -e "CREATE USER '${MYSQL_USER}'@'127.0.0.1' IDENTIFIED BY '${MYSQL_PASSWORD}';"
-
-    echo "* Creating database.."
-    mysql -u root -e "CREATE DATABASE ${MYSQL_DB};"
-
-    echo "* Granting privileges.."
-    mysql -u root -e "GRANT ALL PRIVILEGES ON ${MYSQL_DB}.* TO '${MYSQL_USER}'@'127.0.0.1' WITH GRANT OPTION;"
-
-    echo "* Flushing privileges.."
-    mysql -u root -e "FLUSH PRIVILEGES;"
-
-    echo "* MySQL database created & configured!"
-  fi
-}
-
 # Configure environment
 configure() {
   app_url="http://$FQDN"
