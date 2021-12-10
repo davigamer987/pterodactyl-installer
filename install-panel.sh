@@ -839,7 +839,6 @@ perform_install() {
   [ "$OS" == "centos" ] && centos_php
   install_composer
   ptdl_dl
-  create_database
   configure
   set_folder_permissions
   insert_cronjob
