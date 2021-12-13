@@ -32,6 +32,8 @@ List of supported installation setups for panel and Wings (installations support
 |                  | 16.04   | :red_circle: \*    |             |
 |                  | 18.04   | :white_check_mark: | 8.0         |
 |                  | 20.04   | :white_check_mark: | 8.0         |
+|                  | 21.04   | :white_check_mark: (Bypass Checks) | 8.0         |
+|                  | 21.10   | :white_check_mark: (Bypass checks) | 8.0         |
 | Debian           | 8       | :red_circle: \*    |             |
 |                  | 9       | :white_check_mark: | 8.0         |
 |                  | 10      | :white_check_mark: | 8.0         |
